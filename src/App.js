@@ -4,10 +4,6 @@ import {
   Button,
   Heading,
   SimpleGrid,
-  Slider,
-  SliderTrack,
-  SliderFilledTrack,
-  SliderThumb,
   VStack,
   Text,
   Card,
@@ -138,10 +134,6 @@ function App() {
                   bg="teal.500"
                   padding="1px"
                   borderRadius="lg"
-                  // backgroundColor="green"
-                  // borderColor="black"
-                  // borderWidth={2}
-                  // borderStyle="solid"
                 >
                   {showDragHandle && (
                     <div
@@ -151,6 +143,7 @@ function App() {
                         backgroundColor: 'lightgray',
                         padding: '5px',
                         marginBottom: '10px',
+                        borderRadius: '5px',
                       }}
                     >
                       Drag from here
