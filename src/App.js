@@ -14,17 +14,26 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  IconButton,
+  Portal,
 } from '@chakra-ui/react';
+import { IoSettingsOutline } from 'react-icons/io5';
+import { TfiHandDrag } from 'react-icons/tfi';
 import { Responsive, WidthProvider } from 'react-grid-layout';
+import { AddIcon } from '@chakra-ui/icons';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const CardComponent = ({ header, body, footer }) => (
   <Card
     borderWidth={1}
-    borderRadius="lg"
+    borderRadius="6px"
     overflow="hidden"
-    backgroundColor="olive"
+    backgroundColor="lightblue"
     padding="10px"
   >
     <CardHeader>{header}</CardHeader>
@@ -76,18 +85,40 @@ function App() {
   };
 
   return (
-    <Box p={5}>
+    <Box p={5} pos="relative">
+      <Portal>
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            icon={<IoSettingsOutline />}
+            aria-label="Options"
+            variant="outline"
+            position="fixed"
+            bottom={5}
+            right={10}
+            p={10}
+            transition="all 0.2s"
+            borderRadius="full"
+            borderWidth="1px"
+            _hover={{ bg: 'gray.400' }}
+            _expanded={{ bg: 'blue.400' }}
+            _focus={{ boxShadow: 'outline' }}
+          />
+          <MenuList>
+            <MenuItem minH="48px" onClick={addBox} icon={<AddIcon />}>
+              Add Box
+            </MenuItem>
+            <MenuItem
+              minH="48px"
+              onClick={toggleDragHandle}
+              icon={<TfiHandDrag />}
+            >
+              {showDragHandle ? 'Hide' : 'Show'} Drag Handle
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      </Portal>
       <VStack spacing={5}>
-        <Button onClick={addBox}>Add Box</Button>
-        <Button onClick={toggleDragHandle}>
-          {showDragHandle ? 'Hide' : 'Show'} Drag Handle
-        </Button>
-        <Slider min={0} max={10} value={scale} onChange={setScale}>
-          <SliderTrack>
-            <SliderFilledTrack />
-          </SliderTrack>
-          <SliderThumb />
-        </Slider>
         <Box style={{ width: '100%', height: 'calc(100vh - 100px)' }}>
           <ResponsiveGridLayout
             className="layout"
@@ -105,7 +136,8 @@ function App() {
                   w="100%"
                   h="100%"
                   bg="teal.500"
-                  padding="10px"
+                  padding="1px"
+                  borderRadius="lg"
                   // backgroundColor="green"
                   // borderColor="black"
                   // borderWidth={2}
